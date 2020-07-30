@@ -1,2 +1,3 @@
-# leetcode-cpp-solution
-LeetCode solutions that use latest C++ features
+# LeetCode Solutions Using Modern C++
+
+Use latest C++ features as possible
