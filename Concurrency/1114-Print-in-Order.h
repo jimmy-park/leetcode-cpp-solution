@@ -95,7 +95,7 @@ void TC1114(std::vector<int> input)
 
 void Run1114()
 {
-    std::cout << "Run Test Case 1114" << std::endl;
+    std::cout << "Run TCs of Problem 1114" << std::endl;
 
     std::vector v { 1, 2, 3 };
 

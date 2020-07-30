@@ -7,7 +7,7 @@
 #include <string>
 #include <string_view>
 
-class LongestPalindromicSubstring {
+class Solution0005 {
 public:
     std::string longestPalindrome(std::string_view sv)
     {
@@ -49,15 +49,12 @@ public:
 void TC0005(std::string str)
 {
     std::cout << "[INPUT]  " << str << std::endl;
-
-    LongestPalindromicSubstring lps;
-
-    std::cout << "[OUTPUT] " << lps.longestPalindrome(str) << std::endl;
+    std::cout << "[OUTPUT] " << Solution0005().longestPalindrome(str) << std::endl;
 }
 
 void Run0005()
 {
-    std::cout << "Run Problem 0005" << std::endl;
+    std::cout << "Run TCs of Problem 0005" << std::endl;
 
     TC0005("babad");
     TC0005("cbbd");
