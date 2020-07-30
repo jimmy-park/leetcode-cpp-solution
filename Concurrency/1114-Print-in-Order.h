@@ -1,8 +1,11 @@
 // https://leetcode.com/problems/print-in-order/
+
 #pragma once
 
 #include <condition_variable>
 #include <functional>
+#include <future>
+#include <iostream>
 #include <mutex>
 
 class PrintInOrder {
@@ -57,3 +60,49 @@ private:
     mutable std::mutex mutex_;
     std::condition_variable cv_;
 };
+
+void TC1114(std::vector<int> input)
+{
+    std::cout << "[INPUT]  ";
+    for (auto i : input) {
+        std::cout << i;
+    }
+    std::cout << std::endl;
+
+    PrintInOrder pio;
+    auto first = [&pio] { return pio.first([] { std::cout << "first"; }); };
+    auto second = [&pio] { return pio.second([] { std::cout << "second"; }); };
+    auto third = [&pio] { return pio.third([] { std::cout << "third"; }); };
+
+    std::cout << "[OUTPUT] ";
+
+    std::vector<std::future<void>> tasks;
+
+    for (auto i : input) {
+        if (i == 1)
+            tasks.emplace_back(std::async(std::launch::async, first));
+        else if (i == 2)
+            tasks.emplace_back(std::async(std::launch::async, second));
+        else if (i == 3)
+            tasks.emplace_back(std::async(std::launch::async, third));
+    }
+
+    for (auto& task : tasks)
+        task.get();
+
+    std::cout << std::endl;
+}
+
+void Run1114()
+{
+    std::cout << "Run Problem 1114" << std::endl;
+
+    TC1114({ 1, 2, 3 });
+    TC1114({ 1, 3, 2 });
+    TC1114({ 2, 1, 3 });
+    TC1114({ 2, 3, 1 });
+    TC1114({ 3, 1, 2 });
+    TC1114({ 3, 2, 1 });
+
+    std::cout << std::endl;
+}
