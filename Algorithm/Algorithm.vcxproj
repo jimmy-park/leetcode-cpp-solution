@@ -140,7 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="1-Two-Sum.h" />
+    <ClInclude Include="0005-Longest-Palindromic-Substring.h" />
+    <ClInclude Include="0001-Two-Sum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="1-Two-Sum.h" />
+    <ClInclude Include="0005-Longest-Palindromic-Substring.h" />
+    <ClInclude Include="0001-Two-Sum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
