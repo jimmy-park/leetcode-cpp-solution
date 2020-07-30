@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <algorithm>
 #include <condition_variable>
 #include <functional>
 #include <future>
@@ -64,9 +65,8 @@ private:
 void TC1114(std::vector<int> input)
 {
     std::cout << "[INPUT]  ";
-    for (auto i : input) {
+    for (auto i : input)
         std::cout << i;
-    }
     std::cout << std::endl;
 
     PrintInOrder pio;
@@ -95,14 +95,13 @@ void TC1114(std::vector<int> input)
 
 void Run1114()
 {
-    std::cout << "Run Problem 1114" << std::endl;
+    std::cout << "Run Test Case 1114" << std::endl;
 
-    TC1114({ 1, 2, 3 });
-    TC1114({ 1, 3, 2 });
-    TC1114({ 2, 1, 3 });
-    TC1114({ 2, 3, 1 });
-    TC1114({ 3, 1, 2 });
-    TC1114({ 3, 2, 1 });
+    std::vector v { 1, 2, 3 };
+
+    do {
+        TC1114(v);
+    } while (std::next_permutation(std::begin(v), std::end(v)));
 
     std::cout << std::endl;
 }
