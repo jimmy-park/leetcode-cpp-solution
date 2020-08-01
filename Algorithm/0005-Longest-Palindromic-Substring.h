@@ -3,13 +3,14 @@
 #pragma once
 
 #include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <string>
 #include <string_view>
 
 class Solution0005 {
 public:
-    std::string longestPalindrome(std::string_view sv)
+    std::pair<int, std::string> longestPalindrome(std::string_view sv)
     {
         auto IsPalindrome = [](std::string_view sv) { return std::equal(std::cbegin(sv), std::next(std::cbegin(sv), sv.size() / 2), std::crbegin(sv)); };
 
@@ -23,33 +24,35 @@ public:
                 if (!IsPalindrome(sv.substr(index - arm, 2 * arm + 1)))
                     break;
 
-                if (count < 2 * arm + 1) {
-                    pos = index - arm;
-                    count = 2 * arm + 1;
-                }
+                pos = index - arm;
+                count = 2 * arm + 1;
             }
 
             // Search "abba"-like string
             distance = std::max(0, std::min(index, static_cast<int>(sv.size()) - index - 2));
-            for (auto arm = std::max(0, (count - 2)) / 2; arm <= distance; ++arm) {
+            for (auto arm = count / 2; arm <= distance && index + 2 <= sv.size(); ++arm) {
                 if (!IsPalindrome(sv.substr(index - arm, 2 * arm + 2)))
                     break;
 
-                if (count < 2 * arm + 2) {
-                    pos = index - arm;
-                    count = 2 * arm + 2;
-                }
+                pos = index - arm;
+                count = 2 * arm + 2;
             }
         }
 
-        return static_cast<std::string>(sv.substr(pos, count));
+        return std::make_pair(count, static_cast<std::string>(sv.substr(pos, count)));
     }
 };
 
 void TC0005(std::string str)
 {
-    std::cout << "[INPUT]  " << str << std::endl;
-    std::cout << "[OUTPUT] " << Solution0005().longestPalindrome(str) << std::endl;
+    std::cout << "[INPUT]  " << str << '\t';
+
+    auto start = std::chrono::high_resolution_clock::now();
+    auto res = Solution0005().longestPalindrome(str);
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::cout << "[OUTPUT] " << res.first << ' ' << res.second << '\t';
+    std::cout << "[TIME] " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << " us" << std::endl;
 }
 
 void Run0005()
